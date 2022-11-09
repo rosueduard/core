@@ -9,7 +9,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "android-remove": "rm -rf android",
+    "android-add": "npx cap add android",
+    "android-open": "npx cap open android",
+    "cap-sync": "npx cap sync",
+    "cap-sync-android": "npx cap sync android"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +24,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@capacitor/android": "4.4.0",
     "@capacitor/app": "4.1.0",
     "@capacitor/core": "4.4.0",
     "@capacitor/haptics": "4.0.1",
