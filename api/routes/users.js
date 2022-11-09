@@ -3,7 +3,7 @@ var router = express.Router();
 
 var aa = [
   {
-    fromName: 'Matt Chorsey',
+    fromName: 'Matt Chors',
     subject: 'New event: Trip to Vegas',
     date: '9:32 AM',
     id: 0,

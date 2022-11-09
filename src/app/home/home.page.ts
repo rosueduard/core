@@ -1,22 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService, Message } from '../services/data.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  constructor(private data: DataService) {}
+export class HomePage implements OnInit {
 
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
-  }
+  public messages: Message[];
 
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  public refillList$: Observable<any> = this.data.getMailsList$()
+    .pipe(
+      tap((data) => console.log(data))
+    );
+
+  constructor(
+    private data: DataService,
+    public http: HttpClient
+  ) { }
+
+  ngOnInit(): void {
+    this.data.loadMedicationPlan$();
   }
 
 }

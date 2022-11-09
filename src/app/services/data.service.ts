@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { EmailsListFacade } from '../store/emails-list/emails-list.facade';
+import { loadList } from '../store/emails-list/emails-list.actions';
+import { Observable } from 'rxjs';
+// import { loadMedicationPlan } from '../store/emails-list/emails-list.actions';
 
 export interface Message {
   fromName: string;
@@ -71,10 +76,42 @@ export class DataService {
     }
   ];
 
-  constructor() { }
+  constructor(
+    public http: HttpClient,
+    public emailsListFacade: EmailsListFacade
+  ) { }
 
-  public getMessages(): Message[] {
-    return this.messages;
+  // public async getMessages() {
+  //
+  //   let res;
+  //   await this.http.get('http://localhost:3000/users')
+  //     .subscribe((data: Message[]) => {
+  //       console.log('data', data);
+  //       res = data;
+  //     });
+  //
+  //   return res;
+  //
+  // }
+
+
+  public loadMedicationPlan$() {
+    this.emailsListFacade.dispatch(loadList());
+
+    // return this.actionsSubject$.pipe(
+    //   ofType(MedicationActions.LoadMedicationPlanCompleted, MedicationActions.LoadMedicationPlanFailed),
+    //   switchMap((action) => {
+    //     if (action.type === MedicationActions.LoadMedicationPlanFailed.type) {
+    //       return throwError(action.error);
+    //     }
+    //     return scheduled([true], asyncScheduler)
+    //   })
+    // );
+  }
+
+
+  public getMailsList$(): Observable<Array<any>> {
+    return this.emailsListFacade.list$;
   }
 
   public getMessageById(id: number): Message {
