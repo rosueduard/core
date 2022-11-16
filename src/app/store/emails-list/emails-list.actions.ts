@@ -6,7 +6,7 @@ export const loadList = createAction(
 
 export const loadListCompleted = createAction(
   '[Emails] Load List Completed',
-  props<{ list: any }>()
+  props<{ list: any   }>()
 );
 
 export const loadListFailed = createAction(
